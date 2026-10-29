@@ -857,6 +857,7 @@ Object.assign(T.he,HE_UI);
 
 let lang='he';
 try{const s=localStorage.getItem('uga-lang');if(s==='en'||s==='he')lang=s}catch(e){}
+try{const q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='he'){lang=q;history.replaceState(null,'',location.pathname+location.hash)}}catch(e){}
 const t=k=>T[lang][k]??T.he[k]??k;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
