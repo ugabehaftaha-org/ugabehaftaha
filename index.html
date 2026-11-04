@@ -815,7 +815,7 @@ media_kicker:'Written about us',media_h2:'We are in the media',m1_q:'“The init
  support_h2:'Want to help without baking?',support_p:'Every donation helps us arrange more visits, reach more cities and bring more smiles to seniors waiting for a good conversation.',
  contact_h:'Do you have any questions?',copy:'Copy',copied:'Copied',
  r_kicker:'The Surprise Cake recipe book',r_lead:'Over the years and holidays, our volunteers have formed special bonds with the seniors they visit, and out of those bonds came the Surprise Cake recipe book. Thank you to everyone who baked, told their story and shared.',
- j_keren:'Keren Agam',j_grandma:'Your recipes',skip:'Skip to main content',nav_how:'How does it work?',a11y_stmt:'Accessibility statement',a11y_title:'Accessibility settings',a11y_bigger:'Larger text +',a11y_smaller:'Smaller text −',a11y_contrast:'High contrast',a11y_links:'Highlight links',a11y_font:'Readable font',a11y_still:'Stop animations',a11y_reset:'Reset settings',j_volunteer:'Cakes that are a piece of cake',j_memory:'Baking in their memory',
+ j_keren:'Keren Agam',j_grandma:'Your recipes',share_wa:'Share on WhatsApp',copy_link:'Copy link',link_copied:'Link copied',skip:'Skip to main content',nav_how:'How does it work?',a11y_stmt:'Accessibility statement',a11y_title:'Accessibility settings',a11y_bigger:'Larger text +',a11y_smaller:'Smaller text −',a11y_contrast:'High contrast',a11y_links:'Highlight links',a11y_font:'Readable font',a11y_still:'Stop animations',a11y_reset:'Reset settings',j_volunteer:'Cakes that are a piece of cake',j_memory:'Baking in their memory',
  k_kicker:'A sweet partnership',k_h2:'Keren Agam’s recipes',k_p:'Thank you, Keren, for years of partnership with us, for volunteering and for giving with all your heart.',k_free:'Sugar-free',k_sugar:'With sugar',
  g_kicker:'From grandma’s kitchen',g_h2:'Your recipes',g_p:'The seniors we visit shared the cakes that have been with them all their lives, together with the volunteers who sat down with them for coffee.',
  alt_elka:'Elka Reines Abramovitz',elka_h:'This recipe book is dedicated to the memory of Elka Reines Abramovitz',elka_p:'Elka was a Holocaust survivor and a symbol of hope, love and giving. Over the years she opened her home and her heart to dozens of volunteers, and at every visit she made a necklace or bracelet by hand as a keepsake. She supported the project with love and appeared on TV to talk about the bond between generations. We will always remember you.',
@@ -856,6 +856,7 @@ const HE_UI={ing:'מצרכים',steps:'אופן ההכנה',story:'הסיפור'
 /* capture Hebrew strings from the page */
 document.querySelectorAll('[data-t]').forEach(el=>{T.he[el.dataset.t]=el.textContent});
 document.querySelectorAll('[data-ta]').forEach(el=>{T.he[el.dataset.ta]=el.alt});
+Object.assign(T.he,{share_wa:'שיתוף בוואטסאפ',copy_link:'העתקת קישור',link_copied:'הקישור הועתק'});
 Object.assign(T.he,HE_UI);
 
 let lang='he';
@@ -900,7 +901,7 @@ function card(r){
   const tag=(r.group!=='keren'&&r.sugarFree)?`<span class="tag">${t('sugarfree')}</span>`:'';
   const byTxt=r.group==='volunteer'?(lang==='he'?'המתכון של ':'Recipe by ')+d.by:d.by;
   const by=d.title.includes(d.by)?'':`<span class="by">${esc(byTxt)}</span>`;
-  return `<button class="card" type="button" data-id="${r.id}"><div class="ph">${ph}${tag}</div><div class="body"><h3>${esc(d.title)}</h3>${by}</div></button>`;
+  return `<a class="card" href="/recipes/${r.slug}/" data-id="${r.id}"><div class="ph">${ph}${tag}</div><div class="body"><h3>${esc(d.title)}</h3>${by}</div></a>`;
 }
 const TABS={keren:'free',grandma:'sugar',volunteer:'sugar'};
 function renderRecipes(){
@@ -922,6 +923,7 @@ function openRecipe(id,push){
   if(r.link&&!d.video) body+=`<div class="btn-row"><a class="btn btn-ghost" href="${r.link}" target="_blank" rel="noopener">${t('full')}</a></div>`;
   if(r.img2) body+=`<img src="${r.img2}" alt="" style="border-radius:18px;width:100%;aspect-ratio:16/10;object-fit:cover" loading="lazy">`;
   if(d.story) body+=`<div class="storybox"><h4>${t('story')}</h4><p>${esc(d.story)}</p></div>`;
+  if(r.slug){const u='https://ugabehaftaha.com/recipes/'+r.slug+'/';body+=`<div class="btn-row share-row"><a class="btn btn-ghost" href="https://wa.me/?text=${encodeURIComponent(d.title+' – '+(lang==='he'?'מתכון מספר המתכונים של עוגה בהפתעה':'a recipe from the Surprise Cake recipe book')+'\n'+u)}" target="_blank" rel="noopener">${t('share_wa')}</a><button class="btn btn-ghost" type="button" data-copylink="${u}">${t('copy_link')}</button></div>`;}
   dlg.className=r.group==='memory'?'memory-dlg':'';
   dlgc.innerHTML=`<button class="dlg-x" type="button" aria-label="${t('close')}">×</button>${r.group==='memory'?'':ph}<div class="dlg-body">${body}</div>`;
   if(!dlg.open) dlg.showModal();
@@ -930,8 +932,8 @@ function openRecipe(id,push){
 }
 function closeRecipe(){if(dlg.open)dlg.close()}
 dlg.addEventListener('close',()=>{if(location.hash.startsWith('#r-')){try{history.replaceState(null,'','#recipes')}catch(e){}}});
-dlg.addEventListener('click',e=>{if(e.target===dlg||e.target.closest('.dlg-x'))closeRecipe()});
-document.getElementById('view-recipes').addEventListener('click',e=>{const c=e.target.closest('[data-id]');if(c)openRecipe(c.dataset.id)});
+dlg.addEventListener('click',async e=>{if(e.target===dlg||e.target.closest('.dlg-x'))return closeRecipe();const c=e.target.closest('[data-copylink]');if(c){try{await navigator.clipboard.writeText(c.dataset.copylink);c.textContent=t('link_copied');setTimeout(()=>c.textContent=t('copy_link'),1600)}catch(err){}}});
+document.getElementById('view-recipes').addEventListener('click',e=>{const c=e.target.closest('[data-id]');if(c){e.preventDefault();openRecipe(c.dataset.id)}});
 
 /* routing: home / #recipes / #r-<id> */
 const homeAnchors=['top','how','story','faq','support','partners'];
@@ -989,6 +991,7 @@ document.getElementById('skip').addEventListener('click',e=>{e.preventDefault();
   const labels=()=>{const he=root.lang==='he';fab.setAttribute('aria-label',he?'תפריט נגישות':'Accessibility menu');document.getElementById('menu-btn').setAttribute('aria-label',he?'תפריט':'Menu');document.getElementById('stmt-x').setAttribute('aria-label',he?'סגירה':'Close');document.querySelector('.nav').setAttribute('aria-label',he?'ניווט':'Navigation')};
   new MutationObserver(labels).observe(root,{attributes:true,attributeFilter:['lang']});labels();
   apply();
+  try{if(new URLSearchParams(location.search).get('a11y')){history.replaceState(null,'',location.pathname);dlg.showModal()}}catch(e){}
 })();
 </script>
 
