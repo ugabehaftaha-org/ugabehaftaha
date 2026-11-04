@@ -62,7 +62,6 @@ open(f'{OUT}/_redirects','w').write("""# old Wix addresses -> new site
 /en/*          /?lang=en           301
 /he            /                   301
 /he/*          /                   301
-/recipes       /#recipes           301
-/recipes/*     /#recipes           301
+/recipes/*     /recipes/           301
 /*             /                   301
 """)
