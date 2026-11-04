@@ -7,6 +7,7 @@
 <title>עוגה בהפתעה | התנדבות עם קשישים וניצולי שואה בחגים</title>
 <meta name="description" content="עוגה בהפתעה מפיגה בדידות של קשישים וניצולי שואה. מתנדבים אופים עוגה ומגיעים לביקור בראש השנה, חנוכה, פורים ושבועות, ב־14 ערים ברחבי הארץ. בואו להתנדב.">
 <meta name="keywords" content="עוגה בהפתעה, התנדבות, התנדבות עם קשישים, התנדבות בחגים, ניצולי שואה, בדידות קשישים, התנדבות משפחתית, התנדבות לילדים, עמותה, ביקור קשישים, מתכוני עוגות, Surprise Cake, volunteering Israel">
+<link rel="preload" as="image" href="img/hero-elka-tal.webp" fetchpriority="high">
 <link rel="canonical" href="https://ugabehaftaha.com/">
 <link rel="icon" href="img/logo.webp" type="image/webp">
 <link rel="apple-touch-icon" href="img/logo.webp">
@@ -425,6 +426,7 @@ html,body{overflow-x:clip}
 .r-sec-head.row{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;max-width:none}
 .r-sec-head.row > div:first-child{display:grid;gap:10px;max-width:640px}
 [hidden]{display:none!important}
+:where(img){height:auto}
 /* ===== mobile menu + accessibility ===== */
 .skip{position:fixed;top:-60px;inset-inline-start:16px;z-index:100;background:var(--brn);color:#fff;padding:10px 18px;border-radius:12px;font-weight:700;text-decoration:none;transition:top .2s}
 .skip:focus{top:12px}
@@ -504,8 +506,8 @@ html.a11y-contrast .top .wrap{background:#fff}
       <p class="lead" data-t="hero_lead">המטרה שלנו: להפיג את הבדידות של קשישים וניצולי שואה, באמצעות עוגות.</p>
       <div class="ctas"><a class="btn2 primary" href="#how"><span data-t="cta_volunteer">אני רוצה להתנדב</span> <i aria-hidden="true">←</i></a><a class="btn2 glass" href="https://www.jgive.com/new/he/ils/donation-targets/132585" target="_blank" rel="noopener" data-t="cta_support">אני רוצה לתמוך</a></div>
       <div class="show">
-        <img class="stamp" src="img/logo.webp" alt="">
-        <div class="frame"><img src="img/hero-elka-tal.webp" alt="טל הראל ואלקה ריינס אברמוביץ ז״ל" data-ta="alt_hero"></div>
+        <img class="stamp" src="img/logo.webp" width="354" height="360" alt="">
+        <div class="frame"><img src="img/hero-elka-tal.webp" width="800" height="1000" fetchpriority="high" alt="טל הראל ואלקה ריינס אברמוביץ ז״ל" data-ta="alt_hero"></div>
       </div>
       <div class="chips">
         <div class="chip"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><div><b>30,000</b><span data-t="stat_vol">מתנדבים משנת 2020</span></div></div>
@@ -541,7 +543,7 @@ html.a11y-contrast .top .wrap{background:#fff}
         <div class="cities" id="cities"></div>
       </div>
       <div>
-        <figure class="polaroid story-pol"><img src="img/team-wide.webp" alt="צוות עוגה בהפתעה" loading="lazy" data-ta="alt_team"><figcaption data-t="cap_team">הצוות שלנו</figcaption></figure>
+        <figure class="polaroid story-pol"><img src="img/team-wide.webp" width="1100" height="611" alt="צוות עוגה בהפתעה" loading="lazy" data-ta="alt_team"><figcaption data-t="cap_team">הצוות שלנו</figcaption></figure>
       </div>
     </div>
   </section>
@@ -672,7 +674,7 @@ html.a11y-contrast .top .wrap{background:#fff}
       </div>
       <div class="grid" id="grid-grandma"></div>
       <div class="dedication">
-        <img src="img/elka.webp" alt="אלקה ריינס אברמוביץ ז״ל" loading="lazy" data-ta="alt_elka">
+        <img src="img/elka.webp" width="709" height="1260" alt="אלקה ריינס אברמוביץ ז״ל" loading="lazy" data-ta="alt_elka">
         <div class="t">
           <h3 data-t="elka_h">ספר המתכונים מוקדש לזכרה של אלקה ריינס אברמוביץ ז״ל</h3>
           <p data-t="elka_p">אלקה הייתה ניצולת שואה וסמל של תקווה, אהבה ונתינה. לאורך השנים פתחה את ביתה ואת ליבה לעשרות מתנדבים, ובכל ביקור הכינה במו ידיה שרשרת או צמיד למזכרת. היא ליוותה את המיזם באהבה והתראיינה בטלוויזיה כדי לספר על החיבור בין הדורות. נזכור אותך תמיד.</p>
@@ -894,7 +896,7 @@ const artDates=`<svg viewBox="0 0 400 300" aria-hidden="true"><rect width="400" 
 const phArt=`<svg class="phart" viewBox="0 0 120 90" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M30 66 V46 L72 30 V66 Z"/><path d="M30 46 L72 30"/><path d="M30 56 h42"/><path d="M30 46 c4 4 8 4 12 0 c4 4 8 4 12 0 c4 4 8 4 12-2"/><circle cx="54" cy="32" r="3.5"/><path d="M54 28.5 c0-5 3-8 6-10"/><path d="M20 72 h80"/></svg>`;
 const flame=`<svg class="flame" viewBox="0 0 22 30" aria-hidden="true"><path d="M11 2c3 6 8 9 8 16a8 8 0 0 1-16 0c0-5 3-7 4-11 1 3 2 4 4 5-1-4-1-7 0-10z" fill="var(--butter)" stroke="var(--cocoa)" stroke-width="1.6"/></svg>`;
 function card(r){
-  const d=r[lang];const ph=r.img?`<img src="${r.img}" alt="" loading="lazy"${r.pos?` style="object-position:${r.pos}"`:''}>`:phArt;
+  const d=r[lang];const ph=r.img?`<img src="${r.img}" alt="${esc(d.title)}" loading="lazy"${r.pos?` style="object-position:${r.pos}"`:''}>`:phArt;
   const tag=(r.group!=='keren'&&r.sugarFree)?`<span class="tag">${t('sugarfree')}</span>`:'';
   const byTxt=r.group==='volunteer'?(lang==='he'?'המתכון של ':'Recipe by ')+d.by:d.by;
   const by=d.title.includes(d.by)?'':`<span class="by">${esc(byTxt)}</span>`;
