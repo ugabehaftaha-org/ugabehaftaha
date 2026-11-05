@@ -58,9 +58,27 @@ def describe(r):
     return base[:300]
 
 
+def default_image(out):
+    os.makedirs(f'{out}/img/og', exist_ok=True)
+    dst = f'{out}/img/og/recipe-default.jpg'
+    if not os.path.exists(dst):
+        W, H = 1200, 1200
+        bg = Image.new('RGB', (W, H), (251, 252, 254))
+        from PIL import ImageDraw
+        dr = ImageDraw.Draw(bg)
+        for i in range(H):
+            t = i / H
+            dr.line([(0, i), (W, i)], fill=(int(234 + 17 * t), int(245 + 7 * t), int(253 + 1 * t)))
+        logo = Image.open(f'{out}/img/logo.webp').convert('RGBA')
+        logo.thumbnail((620, 620))
+        bg.paste(logo, ((W - logo.width) // 2, (H - logo.height) // 2), logo)
+        bg.save(dst, quality=88)
+    return URL + 'img/og/recipe-default.jpg'
+
+
 def og_image(site, out, r):
     if not r.get('img'):
-        return URL + 'img/og.jpg'
+        return default_image(out)
     os.makedirs(f'{out}/img/og', exist_ok=True)
     dst = f"img/og/{r['slug']}.jpg"
     im = Image.open(f"{site}/{r['img']}").convert('RGB')
@@ -212,7 +230,7 @@ def index_page(all_r):
     desc = 'ספר המתכונים של עוגה בהפתעה: מתכונים ללא סוכר של קרן אגם, עוגות של סבתא שהקשישים שלנו שיתפו, עוגות קלות של המתנדבים ומתכונים לזכרם של הנופלים.'
     ld = {'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': 'ספר המתכונים של עוגה בהפתעה', 'url': url, 'description': desc,
           'isPartOf': {'@type': 'WebSite', 'name': 'עוגה בהפתעה', 'url': URL},
-          'hasPart': [{'@type': 'Recipe', 'name': r['he']['title'], 'url': f"{URL}recipes/{r['slug']}/"} for r in all_r]}
+          'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': f"{URL}recipes/{r['slug']}/"} for i, r in enumerate(all_r)]}}
     out = HEAD.format(title='ספר המתכונים של עוגה בהפתעה | מתכוני עוגות ביתיות וללא סוכר', desc=e(desc), url=url, ogtype='website',
                       ogtitle='ספר המתכונים של עוגה בהפתעה', image=URL + 'img/og.jpg',
                       ld=f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>')
