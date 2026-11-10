@@ -77,7 +77,7 @@ open(f'{OUT}/_redirects','w').write("""# old Wix addresses -> new site
 /donate                /                  301
 /recipes-kerenagam     /recipes/#keren    301
 /recipes-1             /recipes/          301
-/recipes/*             /recipes/          301
+/recipes/*             /recipes           301
 """)
 open(f'{OUT}/404.html','w').write(recipe_pages.not_found_page())
 

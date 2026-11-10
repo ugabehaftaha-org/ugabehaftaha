@@ -18,4 +18,4 @@
 /donate                /                  301
 /recipes-kerenagam     /recipes/#keren    301
 /recipes-1             /recipes/          301
-/recipes/*             /recipes/          301
+/recipes/*             /recipes           301
