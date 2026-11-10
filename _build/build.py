@@ -4,7 +4,7 @@ It regenerates index.html, recipes/, assets/, sitemap.xml, robots.txt and _redir
 import re,shutil,os,json,sys
 HERE=os.path.dirname(os.path.abspath(__file__));sys.path.insert(0,HERE)
 OUT=os.path.dirname(HERE);SITE=OUT;URL='https://ugabehaftaha.com/'
-for n in ['index.html','recipes','assets','sitemap.xml','robots.txt','_redirects','img/og','README.md']:
+for n in ['index.html','404.html','recipes','assets','sitemap.xml','robots.txt','_redirects','img/og','README.md']:
     q=os.path.join(OUT,n)
     if os.path.isdir(q): shutil.rmtree(q)
     elif os.path.exists(q): os.remove(q)
@@ -58,10 +58,26 @@ open(f'{OUT}/README.md','w').write('# עוגה בהפתעה\nהאתר של עמ�
 print('built',len(refs),'images')
 
 open(f'{OUT}/_redirects','w').write("""# old Wix addresses -> new site
-/en            /?lang=en           301
-/en/*          /?lang=en           301
-/he            /                   301
-/he/*          /                   301
-/recipes/*     /recipes/           301
-/*             /                   301
+/en                    /?lang=en          301
+/en/*                  /?lang=en          301
+/he                    /                  301
+/he/*                  /                  301
+/home                  /                  301
+/our-activity          /#how              301
+/volunteer-signup      /#how              301
+/volunteer             /#how              301
+/questions-answers     /#faq              301
+/faq                   /#faq              301
+/about                 /#story            301
+/about-us              /#story            301
+/our-story             /#story            301
+/partners              /#partners         301
+/media                 /#media            301
+/contact               /#faq              301
+/donate                /                  301
+/recipes-kerenagam     /recipes/#keren    301
+/recipes-1             /recipes/          301
+/recipes/*             /recipes/          301
 """)
+open(f'{OUT}/404.html','w').write(recipe_pages.not_found_page())
+

@@ -1,7 +1,21 @@
 # old Wix addresses -> new site
-/en            /?lang=en           301
-/en/*          /?lang=en           301
-/he            /                   301
-/he/*          /                   301
-/recipes/*     /recipes/           301
-/*             /                   301
+/en                    /?lang=en          301
+/en/*                  /?lang=en          301
+/he                    /                  301
+/he/*                  /                  301
+/home                  /                  301
+/our-activity          /#how              301
+/volunteer-signup      /#how              301
+/volunteer             /#how              301
+/questions-answers     /#faq              301
+/faq                   /#faq              301
+/about                 /#story            301
+/about-us              /#story            301
+/our-story             /#story            301
+/partners              /#partners         301
+/media                 /#media            301
+/contact               /#faq              301
+/donate                /                  301
+/recipes-kerenagam     /recipes/#keren    301
+/recipes-1             /recipes/          301
+/recipes/*             /recipes/          301

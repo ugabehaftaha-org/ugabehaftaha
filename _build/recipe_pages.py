@@ -331,3 +331,15 @@ def build(site, out):
     os.makedirs(f'{out}/recipes', exist_ok=True)
     open(f'{out}/recipes/index.html', 'w').write(index_page(rs))
     return [URL + 'recipes/'] + urls
+
+
+def not_found_page():
+    out = HEAD.format(title='העמוד לא נמצא | עוגה בהפתעה', desc='העמוד שחיפשתם לא נמצא באתר של עוגה בהפתעה.', url=URL, ogtype='website',
+                      ogtitle='עוגה בהפתעה', image=URL + 'img/og.jpg', ld='<meta name="robots" content="noindex">')
+    out += """<div class="wrap" style="text-align:center;padding:60px 20px 20px">
+  <h1>אופס, העמוד הזה לא נמצא</h1>
+  <p class="lead" style="margin:12px auto 26px">ייתכן שהגעתם מקישור ישן. בנינו אתר חדש, והכול נמצא בו:</p>
+  <p class="jump" style="justify-content:center"><a href="/">לדף הבית</a><a href="/#how">אני רוצה להתנדב</a><a href="/recipes/">ספר המתכונים</a><a href="/#faq">שאלות נפוצות</a></p>
+</div>
+"""
+    return out + FOOT
