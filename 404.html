@@ -38,7 +38,7 @@
   <p class="lead" style="margin:12px auto 26px">ייתכן שהגעתם מקישור ישן. בנינו אתר חדש, והכול נמצא בו:</p>
   <p class="jump" style="justify-content:center"><a href="/">לדף הבית</a><a href="/#how">אני רוצה להתנדב</a><a href="/recipes/">ספר המתכונים</a><a href="/#faq">שאלות נפוצות</a></p>
 </div>
-<script>if(/^\/recipes\//.test(location.pathname))location.replace('/recipes/')</script>
+<script>if(location.pathname.startsWith('/recipes/'))location.replace('/recipes/')</script>
 </main>
 <footer><div class="wrap">
   <a class="brand" href="/"><img src="/img/logo.webp" alt="" width="40" height="40"><span>עוגה בהפתעה</span></a>
