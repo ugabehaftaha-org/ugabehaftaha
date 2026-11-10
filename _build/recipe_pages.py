@@ -341,5 +341,6 @@ def not_found_page():
   <p class="lead" style="margin:12px auto 26px">ייתכן שהגעתם מקישור ישן. בנינו אתר חדש, והכול נמצא בו:</p>
   <p class="jump" style="justify-content:center"><a href="/">לדף הבית</a><a href="/#how">אני רוצה להתנדב</a><a href="/recipes/">ספר המתכונים</a><a href="/#faq">שאלות נפוצות</a></p>
 </div>
+<script>if(/^\/recipes\//.test(location.pathname))location.replace('/recipes/')</script>
 """
     return out + FOOT
