@@ -838,7 +838,7 @@ Object.assign(T.he,HE_UI);
 
 let lang='he';
 try{const s=localStorage.getItem('uga-lang');if(s==='en'||s==='he')lang=s}catch(e){}
-try{const q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='he'){lang=q;history.replaceState(null,'',location.pathname+location.hash)}}catch(e){}
+try{const q=new URLSearchParams(location.search).get('lang');if(q==='en'||q==='he'){lang=q;const sp=new URLSearchParams(location.search);sp.delete('lang');const qs=sp.toString();history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash)}}catch(e){}
 const t=k=>T[lang][k]??T.he[k]??k;
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
@@ -878,7 +878,7 @@ function card(r){
   const tag=(r.group!=='keren'&&r.sugarFree)?`<span class="tag">${t('sugarfree')}</span>`:'';
   const byTxt=r.group==='volunteer'?(lang==='he'?'המתכון של ':'Recipe by ')+d.by:d.by;
   const by=d.title.includes(d.by)?'':`<span class="by">${esc(byTxt)}</span>`;
-  return `<a class="card" href="/recipes/${r.slug}/" data-id="${r.id}"><div class="ph">${ph}${tag}</div><div class="body"><h3>${esc(d.title)}</h3>${by}</div></a>`;
+  return `<a class="card" href="${lang==='en'?'/en':''}/recipes/${r.slug}/" data-id="${r.id}"><div class="ph">${ph}${tag}</div><div class="body"><h3>${esc(d.title)}</h3>${by}</div></a>`;
 }
 const TABS={keren:'free',grandma:'sugar',volunteer:'sugar'};
 function renderRecipes(){
@@ -900,7 +900,7 @@ function openRecipe(id,push){
   if(r.link&&!d.video) body+=`<div class="btn-row"><a class="btn btn-ghost" href="${r.link}" target="_blank" rel="noopener">${t('full')}</a></div>`;
   if(r.img2) body+=`<img src="${r.img2}" alt="" style="border-radius:18px;width:100%;aspect-ratio:16/10;object-fit:cover" loading="lazy">`;
   if(d.story) body+=`<div class="storybox"><h4>${t('story')}</h4><p>${esc(d.story)}</p></div>`;
-  if(r.slug){const u='https://ugabehaftaha.com/recipes/'+r.slug+'/';body+=`<div class="btn-row share-row"><a class="btn btn-ghost" href="https://wa.me/?text=${encodeURIComponent(d.title+' – '+(lang==='he'?'מתכון מספר המתכונים של עוגה בהפתעה':'a recipe from the Surprise Cake recipe book')+'\n'+u)}" target="_blank" rel="noopener">${t('share_wa')}</a><button class="btn btn-ghost" type="button" data-copylink="${u}">${t('copy_link')}</button></div>`;}
+  if(r.slug){const u='https://ugabehaftaha.com/'+(lang==='en'?'en/':'')+'recipes/'+r.slug+'/';body+=`<div class="btn-row share-row"><a class="btn btn-ghost" href="https://wa.me/?text=${encodeURIComponent(d.title+' – '+(lang==='he'?'מתכון מספר המתכונים של עוגה בהפתעה':'a recipe from the Surprise Cake recipe book')+'\n'+u)}" target="_blank" rel="noopener">${t('share_wa')}</a><button class="btn btn-ghost" type="button" data-copylink="${u}">${t('copy_link')}</button></div>`;}
   dlg.className=r.group==='memory'?'memory-dlg':'';
   dlgc.innerHTML=`<button class="dlg-x" type="button" aria-label="${t('close')}">×</button>${r.group==='memory'?'':ph}<div class="dlg-body">${body}</div>`;
   if(!dlg.open) dlg.showModal();
