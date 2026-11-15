@@ -160,7 +160,7 @@ def recipe_ld(r, image, url, desc):
         'recipeCategory': 'קינוח', 'recipeCuisine': 'ישראלית',
         'keywords': ', '.join(filter(None, [d['title'], 'ללא סוכר' if r.get('sugarFree') else '', 'עוגה בהפתעה', 'מתכון ביתי', GNAME[r['group']]])),
         'recipeIngredient': d['ing'],
-        'recipeInstructions': [{'@type': 'HowToStep', 'text': s} for s in d['steps']],
+        'recipeInstructions': [{'@type': 'HowToStep', 'name': f'שלב {i + 1}', 'text': s, 'url': f'{url}#step-{i + 1}'} for i, s in enumerate(d['steps'])],
     }
     crumbs = {'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [
         {'@type': 'ListItem', 'position': 1, 'name': 'עוגה בהפתעה', 'item': URL},
@@ -201,7 +201,7 @@ def page(r, all_r, image):
         out += f'  <p>קרן הכינה את המתכון הזה בסרטון.</p><p><a class="btn" href="{e(r["link"])}" target="_blank" rel="noopener">לצפייה במתכון באינסטגרם</a></p>\n'
     if d.get('ing'):
         out += '  <div class="cols">\n    <section><h2>מצרכים</h2><ul>' + ''.join(f'<li>{e(i)}</li>' for i in d['ing']) + '</ul></section>\n'
-        out += '    <section><h2>אופן ההכנה</h2><ol>' + ''.join(f'<li>{e(s)}</li>' for s in d['steps']) + '</ol></section>\n  </div>\n'
+        out += '    <section><h2>אופן ההכנה</h2><ol>' + ''.join(f'<li id="step-{i + 1}">{e(s)}</li>' for i, s in enumerate(d['steps'])) + '</ol></section>\n  </div>\n'
     if d.get('note'):
         out += f'  <p class="note">{e(d["note"])}</p>\n'
     if r.get('link') and not d.get('video'):
