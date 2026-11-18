@@ -311,6 +311,9 @@ h1,h2,h3{color:var(--ink2)}
 .hero{background:transparent;color:var(--ink2);padding-block:clamp(64px,8vw,104px) 20px;text-align:center}
 .hero .wrap{display:block}
 .badge{display:inline-flex;align-items:center;gap:10px;padding:7px 8px 7px 16px;border-radius:999px;background:#fff;border:1px solid var(--line2);font-size:14px;font-weight:500;color:var(--soft2);box-shadow:0 6px 20px -12px rgba(40,70,100,.4)}
+.badge{text-decoration:none;transition:transform .2s,box-shadow .2s}
+a.badge:hover{transform:translateY(-1px);box-shadow:0 10px 24px -12px rgba(40,70,100,.5)}
+[dir=ltr] .badge>span[aria-hidden]{transform:scaleX(-1)}
 .badge b{background:linear-gradient(135deg,#3E9BDB,#8CCBF2);color:#fff;font-weight:700;padding:3px 10px;border-radius:999px;font-size:12px}
 .hero h1{font-weight:900;font-size:clamp(60px,11vw,146px);line-height:.95;letter-spacing:-.045em;margin:28px 0 0;color:var(--brn)}
 .hero h1 [data-t="hero_h1a"]{background:linear-gradient(180deg,#5A3824 20%,#8A5A3B 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -478,7 +481,7 @@ html.a11y-contrast .top .wrap{background:#fff}
 <main id="view-home">
   <section class="hero" id="top">
     <div class="wrap">
-      <span class="badge"><b data-t="badge_new">חדש</b><span data-t="hero_badge">ההרשמה לחנוכה נפתחת בקרוב</span></span>
+      <a class="badge" href="https://salmaz.herokuapp.com/uga/events" target="_blank" rel="noopener"><b data-t="badge_new">חדש</b><span data-t="hero_badge">ההרשמה לחנוכה פתוחה! להרשמה</span><span aria-hidden="true">←</span></a>
       <h1><span data-t="hero_h1a">עוגה</span> <span class="bl" data-t="hero_h1b">בהפתעה</span></h1>
       <p class="lead" data-t="hero_lead">המטרה שלנו: להפיג את הבדידות של קשישים וניצולי שואה, באמצעות עוגות.</p>
       <div class="ctas"><a class="btn2 primary" href="#how"><span data-t="cta_volunteer">אני רוצה להתנדב</span> <i aria-hidden="true">←</i></a><a class="btn2 glass" href="https://www.jgive.com/new/he/ils/donation-targets/132585" target="_blank" rel="noopener" data-t="cta_support">אני רוצה לתמוך</a></div>
@@ -767,7 +770,7 @@ document.documentElement.style.setProperty('--scallop',`url("data:image/svg+xml;
 const VOL='https://salmaz.herokuapp.com/uga/events';
 const T={he:{},en:{
  brand:'Surprise Cake',nav_how:'How it works',nav_story:'Our Story',nav_recipes:'Recipes',nav_faq:'Questions',nav_cta:'I want to volunteer',
- badge_new:'New',hero_badge:'Hanukkah registration opens soon',how_eyebrow:'4 steps',how_lead2:'We are active on Rosh Hashanah, Hanukkah, Purim and Shavuot.',cta_signup2:'Sign up',hero_h1a:'Surprise',hero_h1b:'Cake',beat1:'Bake a cake',beat2:'We connect you with an elderly person',beat3:'You visit the elderly and give them the cake',
+ badge_new:'New',hero_badge:'Hanukkah registration is open! Sign up',how_eyebrow:'4 steps',how_lead2:'We are active on Rosh Hashanah, Hanukkah, Purim and Shavuot.',cta_signup2:'Sign up',hero_h1a:'Surprise',hero_h1b:'Cake',beat1:'Bake a cake',beat2:'We connect you with an elderly person',beat3:'You visit the elderly and give them the cake',
  hero_lead:'Our goal is to relieve loneliness and give attention to the elderly and Holocaust survivors throughout the country via cakes.',
  cta_volunteer:'I want to volunteer',cta_support:'I want to donate',sticker:'Since 2020',alt_team:'The Surprise Cake team',alt_hero:'Tal Harel and the late Elka Reines Abramovitz',cap_hero:'Tal and Elka, of blessed memory',cap_team:'Our team',
  stat_vol:'volunteers since 2020',stat_seniors:'elderly people visited',stat_cities:'cities across the country',
